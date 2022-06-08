@@ -1,0 +1,10 @@
+=head1 Unix domain socket binder POC
+
+This is kind of like a stripped-down version of what inetd (in wait mode) or
+L<s6-ipcserver-socketbinder|https://skarnet.org/software/s6/s6-ipcserver-socketbinder.html>
+would do: bind and listen on a socket (specifically a Unix domain socket here),
+then exec into another program with the socket as fd 0 (replacing stdin).
+
+Basically, this lets the receiving program be bound to a socket without having
+to know I<how> to bind to the various types of socket, with the socket binding
+abstracted into a tiny program like these for each kind.
